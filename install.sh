@@ -18,5 +18,5 @@ curl https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/MesloL
 curl https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/MesloLGS%20NF%20Italic.ttf --output ~/.local/share/fonts/meslo-lgs-nf/italic.ttf --create-dirs
 curl https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/MesloLGS%20NF%20Bold%20Italic.ttf --output ~/.local/share/fonts/meslo-lgs-nf/bolditalic.ttf --create-dirs
 
-ln -s $CURR_DIR/.zshrc $HOME/.zshrc
-ln -s $CURR_DIR/.p10k.zsh $HOME/.p10k.zsh
+cp -f $CURR_DIR/.zshrc $HOME/.zshrc
+cp -f $CURR_DIR/.p10k.zsh $HOME/.p10k.zsh
