@@ -20,6 +20,3 @@ curl https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/MesloL
 
 cp -f $CURR_DIR/.zshrc $HOME/.zshrc
 cp -f $CURR_DIR/.p10k.zsh $HOME/.p10k.zsh
-
-apt install tzdata -y
-export TZ="Europe/Prague"
