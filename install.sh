@@ -16,4 +16,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k ${ZSH_CUSTOM:-~/.oh
 cp -f $CURR_DIR/configs/.zshrc $HOME/.zshrc
 cp -f $CURR_DIR/configs/.p10k.zsh $HOME/.p10k.zsh
 
+source ~/.zshrc
+
 sudo chsh -s /bin/zsh
