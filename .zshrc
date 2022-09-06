@@ -33,13 +33,15 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 
-# Delete local and remote branch
+## Git
+
+### Delete local and remote branch
 gdb() {
     git branch -d $1
     git push origin --delete $1
 }
 
-# Add all and ammend last commit
+### Add all and ammend last commit
 alias gfix="git add --all && git commit --amend --no-edit"
 
 alias gl="git log"
@@ -48,5 +50,63 @@ alias gc="git cz"
 
 alias sc="source $HOME/.zshrc"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+
+## GH CLI
+
+alias gcl="gh codespace list"
+
+### Get Codespace name by displayName
+gcg() {
+  if [ "$1" = "" ]; then
+    echo "\033[0;31mNo displayName passed as an argument.\033[0m" 1>&2
+    return 1
+  fi
+
+  codespaces=$(gh codespace list)
+  codespace_name=$(echo "$codespaces" | awk '{print $1, $2}' | grep $1 | awk '{print $1}')
+
+  echo $codespace_name
+}
+
+### Edit Codespace by displayName
+gce() {
+  codespace_name=$(gcg $1)
+  if [ "$codespace_name" = "" ]; then
+    echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
+    echo $codespaces
+    return
+  fi
+
+  echo "Opening codespace $1 ($codespace_name)..."
+  gh codespace edit -c $codespace_name -d $2
+}
+
+### Open Codespace by displayName
+gcc() {
+  codespace_name=$(gcg $1)
+  if [ "$codespace_name" = "" ]; then
+    echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
+    echo $codespaces
+    return
+  fi
+  
+  echo "Opening codespace $1 ($codespace_name)..."
+  gh codespace code -c "$codespace_name"
+}
+
+### Delete Codespace by displayName
+gcr() {
+  codespace_name=$(gcg $1)
+  if [ "$codespace_name" = "" ]; then
+    echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
+    echo $codespaces
+    return
+  fi
+
+  echo "Opening codespace $1 ($codespace_name)..."
+  gh codespace delete -c $codespace_name
+}
+
+
+## To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
