@@ -1,11 +1,13 @@
 #!/bin/bash
 
+
 password=""
 echo "Please provide your Git commit info"
 read -p "Full name: " fullName
 read -p "Email: " email
 read -p "Key password: " -s password
 echo ""
+
 
 echo "Setting up global Git identity"
 
@@ -16,73 +18,57 @@ echo "Setting up SSH key"
 
 key_name="github_ed25519"
 ssh-keygen -t ed25519 -C $email -f ~/.ssh/$key_name -N $password
-
-# Add to .zshrc (required?)
-# TODO: Remove this requirement
-# echo "# ssh" >> ~/.zshrc
-# echo 'eval "$(ssh-agent -s)"' >> ~/.zshrc
-# echo "ssh-add ~/.ssh/$key_name" >> ~/.zshrc
-# echo "" >> ~/.zshrc
-# echo "> SSH key will be added on ZSH session start. Dont forget to run 'source ~/.zsrhc' after the script finishes."
+chmod 600 ~/.ssh/$key_name
+chmod 644 ~/.ssh/$key_name.pub
 
 # Copy .pub and open GitHub
 ssh_key=$(cat ~/.ssh/$key_name.pub)
-# WSL
-echo $ssh_key | clip.exe 2>/dev/null
-# Mac
-echo $ssh_key | pbcoby 2>/dev/null
+# # WSL
+# echo $ssh_key | clip.exe 2>/dev/null
+# # Mac
+# echo $ssh_key | pbcoby 2>/dev/null
+# TODO: Automate this step
 
-echo "SSH key copied. Please paste it to your GitHub account's SSH keys"
+github_new_ssh_url="https://github.com/settings/ssh/new"
+echo "Please paste the public key to your GitHub account's SSH keys"
+echo $ssh_key
+# WSL
+explorer.exe $github_new_ssh_url 2>/dev/null
+# Mac
+open $github_new_ssh_url 2>/dev/null
+
+read -p "Press any key to resume..." 
+
+
+echo "Setting up SSH signing key"
+
+signing_key_name="github_signing_ed25519"
+ssh-keygen -t ed25519 -C $email -f ~/.ssh/$signing_key_name -N $password
+chmod 600 ~/.ssh/$signing_key_name
+chmod 644 ~/.ssh/$signing_key_name.pub
+
+# Copy .pub and open GitHub
+signing_key=$(cat ~/.ssh/$key_name.pub)
+# # WSL
+# echo $signing_key | clip.exe 2>/dev/null
+# # Mac
+# echo $signing_key | pbcoby 2>/dev/null
+# TODO: Automate this step
+
+echo "Please paste it to your GitHub account's SSH keys with the 'Signing' key type."
+echo $signing_key
 # WSL
 explorer.exe https://github.com/settings/ssh/new 2>/dev/null
 # Mac
 open https://github.com/settings/ssh/new 2>/dev/null
 
-read -p "Press any key to resume..." 
-
-echo "Setting up GPG key"
-
-export GPG_TTY=$(tty)
-
-# Generate GPG key
-keyComment="Github key for $email"
-cat >keyConfig <<EOF
-    Key-Type: default
-    Key-Length: 4096
-    Subkey-Type: default
-    Subkey-Length: 4096
-    Name-Real: $fullName
-    Name-Comment: $keyComment
-    Name-Email: $email
-    Expire-Date: 0
-    Protection: $password
-    %commit
-EOF
-echo "Generating GPG key... (this might take a lot of time)"
-gpg --batch --generate-key keyConfig
-rm -rf keyConfig
-
-# Get pub key id
-keyId=$(gpg --list-secret-keys $keyComment | sed -n 2p | xargs)
-
-# Set signing key on Git
-git config --global user.signingkey $keyId
-git config --global commit.gpgsign true
-
-# Copy pub key and open GitHub
-gpg_key=$(gpg --armor --export $keyId)
-# WSL
-echo $gpg_key | clip.exe 2>/dev/null
-# Mac
-echo $gpg_key | pbcoby 2>/dev/null
-
-echo "GPG key copied. Please paste it to your GitHub account's GPG keys."
-# WSL
-explorer.exe https://github.com/settings/gpg/new 2>/dev/null
-# Mac
-open https://github.com/settings/gpg/new 2>/dev/null
-
 read -p "Press any key to resume..."
+
+awk '{ print $3 " " $1 " " $2 }' ~/.ssh/$signing_key_name.pub >> ~/.ssh/allowed_signers
+
+git config --global gpg.format ssh
+git config --global user.signingkey "$(cat ~/.ssh/$signing_key_name.pub)"
+git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 
 # Create SSH config file
 touch ~/.ssh/config
@@ -90,5 +76,6 @@ echo "Host *" >> ~/.ssh/config
 echo "    IdentityFile ~/.ssh/$key_name" >> ~/.ssh/config
 
 # Add SSH key to agent
-eval "$(ssh-agent -s)"
+eval `ssh-agent`
 ssh-add ~/.ssh/$key_name
+ssh-add ~/.ssh/$signing_key_name
