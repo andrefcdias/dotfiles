@@ -2,6 +2,8 @@
 ./setup_fonts.sh
 
 brew install --cask maccy iterm2 visual-studio-code rectangle
+brew install n
+n install latest
 
 # From https://macos-defaults.com/
 # Remove recent apps from dock
