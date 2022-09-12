@@ -46,7 +46,7 @@ alias gfix="git add --all && git commit --amend --no-edit"
 
 alias gl="git log"
 alias ga="git add ."
-alias gc="git cz"
+alias gum="git checkout master && git pull && git checkout -"
 
 alias sc="source $HOME/.zshrc"
 
