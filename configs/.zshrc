@@ -53,10 +53,28 @@ alias sc="source $HOME/.zshrc"
 
 ## GH CLI
 
-alias gcl="gh codespace list"
+alias cl='gh cs list'
+
+### Watch for codespace changes
+clw() {
+  timeout=5
+
+  if [ "$1" != "" ]; then
+    timeout=$1
+  fi
+
+  while :
+  do
+    echo "⏳"
+    output=$(gh cs list)
+    clear
+    echo $output
+    sleep $timeout
+  done
+}
 
 ### Get Codespace name by displayName
-gcg() {
+cg() {
   if [ "$1" = "" ]; then
     echo "\033[0;31mNo displayName passed as an argument.\033[0m" 1>&2
     return 1
@@ -69,11 +87,11 @@ gcg() {
 }
 
 ### Edit Codespace by displayName
-gce() {
-  codespace_name=$(gcg $1)
+ce() {
+  codespace_name=$(cg $1)
   if [ "$codespace_name" = "" ]; then
     echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
-    echo $codespaces
+    cl
     return
   fi
 
@@ -81,12 +99,25 @@ gce() {
   gh codespace edit -c $codespace_name -d $2
 }
 
-### Open Codespace by displayName
-gcc() {
-  codespace_name=$(gcg $1)
+### Stop Codespace by displayName
+cs() {
+  codespace_name=$(cg $1)
   if [ "$codespace_name" = "" ]; then
     echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
-    echo $codespaces
+    cl
+    return
+  fi
+
+  echo "Opening codespace $1 ($codespace_name)..."
+  gh codespace stop -c $codespace_name
+}
+
+### Open Codespace by displayName
+cc() {
+  codespace_name=$(cg $1)
+  if [ "$codespace_name" = "" ]; then
+    echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
+    cl
     return
   fi
   
@@ -95,15 +126,15 @@ gcc() {
 }
 
 ### Delete Codespace by displayName
-gcr() {
-  codespace_name=$(gcg $1)
+cr() {
+  codespace_name=$(cg $1)
   if [ "$codespace_name" = "" ]; then
     echo "\033[0;31mCodespace with display name '$1' not found. Codespaces available:\n\033[0m"
-    echo $codespaces
+    cl
     return
   fi
 
-  echo "Opening codespace $1 ($codespace_name)..."
+  echo "Deleting codespace $1 ($codespace_name)..."
   gh codespace delete -c $codespace_name
 }
 
