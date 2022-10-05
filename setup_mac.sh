@@ -1,7 +1,7 @@
 
 ./setup_fonts.sh
 
-brew install --cask maccy iterm2 visual-studio-code rectangle
+brew install --cask maccy iterm2 visual-studio-code rectangle keycastr
 brew install n
 n install latest
 
