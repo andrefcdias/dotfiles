@@ -31,6 +31,7 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # os_icon               # os identifier
+    dyno_host               # custom host identifier (supports Codespaces)
     dir                     # current directory
     vcs                     # git status
     prompt_char             # prompt symbol
@@ -1620,3 +1621,25 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
+
+
+function prompt_dyno_host() {
+  HOST="local"
+  ICON="🏠"
+
+  if [[ -n "$CODESPACE_NAME" ]]; then
+    HOST="$CODESPACE_NAME"
+
+    if [[ ${#HOST} -gt 10 ]]; then
+      HOST="~${CODESPACE_NAME: -9}"
+    fi
+
+    ICON="🪐"
+  fi
+
+  p10k segment -f '#efc1cc' -i $ICON -t $HOST
+}
+
+function instant_prompt_dyno_host() {
+  prompt_dyno_host
+}
