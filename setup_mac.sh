@@ -11,6 +11,7 @@ brew install zsh
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
 
 brew install gh
+gh auth login -s user
 
 brew install --cask maccy iterm2 visual-studio-code rectangle keycastr
 brew install n
@@ -30,8 +31,10 @@ defaults write -g com.apple.swipescrolldirection -bool false
 defaults write -g NSScrollAnimationEnabled -bool false
 
 # Copy iterm2 profiles and set default
+mkdir -p "~/Library/Application Support/iTerm2/DynamicProfiles"
 cp ./configs/iterm2.json "~/Library/Application Support/iTerm2/DynamicProfiles/profiles.json"
 defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
 
 # Copy Rectange profile
+mkdir -p "~/Library/Application Support/Rectangle"
 cp ./configs/rectangle.json "~/Library/Application Support/Rectangle/RectangleConfig.json"
