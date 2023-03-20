@@ -15,11 +15,24 @@ brew install zsh
 brew install gh
 gh auth login -s user
 
-brew install --cask maccy rectangle
-open -a Rectangle
+brew install --cask maccy
 open -a Maccy
 
-brew install --cask iterm2 visual-studio-code keycastr
+brew install --cask rectangle
+# Copy Rectange profile
+RECT_PATH="$HOME/Library/Application Support/Rectangle"
+mkdir -p $RECT_PATH
+cp ./configs/rectangle.json "$RECT_PATH/RectangleConfig.json"
+open -a Rectangle
+
+brew install --cask iterm2
+# Copy iterm2 profiles and set default
+ITERM_PATH="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+mkdir -p $ITERM_PATH
+cp ./configs/iterm2.json "$ITERM_PATH/profiles.json"
+defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
+
+brew install --cask visual-studio-code keycastr
 
 brew install n
 n install latest
@@ -39,12 +52,3 @@ defaults write -g NSScrollAnimationEnabled -bool false
 
 # Restart dock
 killall Dock
-
-# Copy iterm2 profiles and set default
-mkdir -p "~/Library/Application Support/iTerm2/DynamicProfiles"
-cp ./configs/iterm2.json "~/Library/Application Support/iTerm2/DynamicProfiles/profiles.json"
-defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
-
-# Copy Rectange profile
-mkdir -p "~/Library/Application Support/Rectangle"
-cp ./configs/rectangle.json "~/Library/Application Support/Rectangle/RectangleConfig.json"
