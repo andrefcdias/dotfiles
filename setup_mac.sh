@@ -1,6 +1,17 @@
 
 ./setup_fonts.sh
 
+sudo xcode-select --install
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+brew install zsh
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
+
+brew install gh
+
 brew install --cask maccy iterm2 visual-studio-code rectangle keycastr
 brew install n
 n install latest
@@ -19,8 +30,8 @@ defaults write -g com.apple.swipescrolldirection -bool false
 defaults write -g NSScrollAnimationEnabled -bool false
 
 # Copy iterm2 profiles and set default
-cp ./profiles/iterm2.json "~/Library/Application Support/iTerm2/DynamicProfiles/profiles.json"
+cp ./configs/iterm2.json "~/Library/Application Support/iTerm2/DynamicProfiles/profiles.json"
 defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
 
 # Copy Rectange profile
-cp ./profiles/rectangle.json "~/Library/Application Support/Rectangle/RectangleConfig.json"
+cp ./configs/rectangle.json "~/Library/Application Support/Rectangle/RectangleConfig.json"
