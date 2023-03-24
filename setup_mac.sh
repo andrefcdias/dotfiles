@@ -15,6 +15,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install zsh
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
 
+brew install --cask visual-studio-code
+brew install n
+n install latest
+
 ./install.sh
 
 brew install --cask maccy

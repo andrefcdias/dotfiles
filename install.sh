@@ -19,3 +19,6 @@ cp -f $CURR_DIR/configs/.p10k.zsh $HOME/.p10k.zsh
 source ~/.zshrc
 
 sudo chsh -s /bin/zsh
+
+npm install -g @githubnext/github-copilot-cli
+eval "$(github-copilot-cli alias -- "$0")"
