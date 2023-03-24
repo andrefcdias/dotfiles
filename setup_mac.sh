@@ -44,6 +44,10 @@ brew install --cask keycastr colour-contrast-analyser pika
 brew install --cask postman
 
 # Mac customization configs (https://macos-defaults.com/)
+## Copilot generated :monkaS:
+### Swap Option and Command keys
+defaults write -g "com.apple.keyboard.modifiermapping.1452-610-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>"
+
 ## Remove recent apps from dock
 defaults write com.apple.dock "show-recents" -bool false
 
