@@ -54,3 +54,6 @@ defaults write -g NSScrollAnimationEnabled -bool false
 
 ## Restart dock
 killall Dock
+
+# "Productivity" apps
+brew install --cask spotify discord
