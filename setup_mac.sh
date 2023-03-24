@@ -34,23 +34,23 @@ mkdir -p $ITERM_PATH
 cp ./configs/iterm2.json "$ITERM_PATH/profiles.json"
 defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
 
-brew install --cask visual-studio-code keycastr
+# A11y queens
+brew install --cask keycastr colour-contrast-analyser pika
 
-brew install n
-n install latest
+brew install --cask postman
 
-# From https://macos-defaults.com/
-# Remove recent apps from dock
+# Mac customization configs (https://macos-defaults.com/)
+## Remove recent apps from dock
 defaults write com.apple.dock "show-recents" -bool false
 
-# Disable natural scrolling for mouse
+## Disable natural scrolling for mouse
 defaults write -g com.apple.swipescrolldirection -bool false
 
-# Remove scroll inertia
-# defaults write .GlobalPreferences com.apple.scrollwheel.scaling -1 # Is this working?
+## Remove scroll inertia
+### defaults write .GlobalPreferences com.apple.scrollwheel.scaling -1 # Is this working?
 
-# Disable smooth scrolling
+## Disable smooth scrolling
 defaults write -g NSScrollAnimationEnabled -bool false
 
-# Restart dock
+## Restart dock
 killall Dock
