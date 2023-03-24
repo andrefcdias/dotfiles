@@ -44,18 +44,19 @@ brew install --cask keycastr colour-contrast-analyser pika
 brew install --cask postman
 
 # Mac customization configs (https://macos-defaults.com/)
-## Copilot generated :monkaS:
-### Swap Option and Command keys
+### Swap Option and Command keys - by Copilot ❤️
 defaults write -g "com.apple.keyboard.modifiermapping.1452-610-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>"
+
+## Obliterate annoying space creator when dragging app to top of screen (not working 🤬)
+# defaults write com.apple.dock mcx-expose-disabled -bool TRUE
+# defaults write com.apple.dashboard mcx-disabled -bool TRUE
+# killall Dock
 
 ## Remove recent apps from dock
 defaults write com.apple.dock "show-recents" -bool false
 
 ## Disable natural scrolling for mouse
 defaults write -g com.apple.swipescrolldirection -bool false
-
-## Remove scroll inertia
-### defaults write .GlobalPreferences com.apple.scrollwheel.scaling -1 # Is this working?
 
 ## Disable smooth scrolling
 defaults write -g NSScrollAnimationEnabled -bool false
