@@ -71,5 +71,6 @@ defaults write -g NSScrollAnimationEnabled -bool false
 ## Restart dock
 killall Dock
 
-# "Productivity" apps
+# Other apps
+brew install --cask microsoft-edge microsoft-teams
 brew install --cask spotify discord
