@@ -10,6 +10,8 @@ done
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
 brew install gh
 echo "Your GitHub emails:"
 gh auth login -s user -s codespace
@@ -25,6 +27,7 @@ sudo n install latest
 ./install.sh
 
 brew install --cask maccy
+sleep 1
 open -a Maccy
 
 brew install --cask rectangle
@@ -32,6 +35,7 @@ brew install --cask rectangle
 RECT_PATH="$HOME/Library/Application Support/Rectangle"
 mkdir -p $RECT_PATH
 cp ./configs/rectangle.json "$RECT_PATH/RectangleConfig.json"
+sleep 1
 open -a Rectangle
 
 brew install --cask iterm2
