@@ -1,7 +1,10 @@
 
 ./setup_fonts.sh
 
-sudo xcode-select --install
+sudo xcode-select --install &> /dev/null
+until $(xcode-select --print-path &> /dev/null); do
+  sleep 5;
+done
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
