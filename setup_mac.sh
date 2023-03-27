@@ -20,7 +20,7 @@ brew install zsh
 
 brew install --cask visual-studio-code
 brew install n
-n install latest
+sudo n install latest
 
 ./install.sh
 
