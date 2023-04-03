@@ -19,6 +19,7 @@ gh api --method GET /user/emails --jq ".[].email"
 
 brew install zsh
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
+sudo chsh -s /bin/zsh
 
 brew install --cask visual-studio-code
 brew install n
