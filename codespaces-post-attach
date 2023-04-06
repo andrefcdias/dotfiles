@@ -1,6 +1,13 @@
 #!/bin/sh
 
-# npm install -g @githubnext/github-copilot-cli
-# (echo; echo 'eval "$(github-copilot-cli alias -- "$0")"') >> ~/.zshrc
+NPM_PATH=$(npm config get prefix)
+if ! echo $PATH | grep -q $NPM_PATH; then
+    export PATH=$NPM_PATH/bin:$PATH
+fi
+
+if [ -z $(npm list --depth 0 --global @githubnext/github-copilot-cli -p) ]; then
+  npm install -g @githubnext/github-copilot-cli
+  eval "$(github-copilot-cli alias -- "$0")"
+fi
 
 zsh
