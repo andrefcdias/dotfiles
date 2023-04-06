@@ -7,7 +7,8 @@ fi
 
 if [ -z $(npm list --depth 0 --global @githubnext/github-copilot-cli -p) ]; then
   npm install -g @githubnext/github-copilot-cli
-  eval "$(github-copilot-cli alias -- "$0")"
 fi
+
+eval "$(github-copilot-cli alias -- "$0")"
 
 zsh
