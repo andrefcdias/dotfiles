@@ -1,7 +1,5 @@
 #!/bin/sh
 
-sudo chsh -s /bin/zsh
-
 npm install -g @githubnext/github-copilot-cli
 (echo; echo 'eval "$(github-copilot-cli alias -- "$0")"') >> ~/.zshrc
 
