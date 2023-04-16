@@ -1,14 +1,14 @@
-#!/bin/sh
+# #!/bin/sh
 
-NPM_PATH=$(npm config get prefix)
-if ! echo $PATH | grep -q $NPM_PATH; then
-    export PATH=$NPM_PATH/bin:$PATH
-fi
+# NPM_PATH=$(npm config get prefix)
+# if ! echo $PATH | grep -q $NPM_PATH; then
+#     export PATH=$NPM_PATH/bin:$PATH
+# fi
 
-if [ -z $(npm list --depth 0 --global @githubnext/github-copilot-cli -p) ]; then
-  npm install -g @githubnext/github-copilot-cli
-fi
+# if [ -z $(npm list --depth 0 --global @githubnext/github-copilot-cli -p) ]; then
+#   npm install -g @githubnext/github-copilot-cli
+# fi
 
-eval "$(github-copilot-cli alias -- "$0")"
+# eval "$(github-copilot-cli alias -- "$0")"
 
-zsh
+# zsh
