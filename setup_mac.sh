@@ -47,7 +47,8 @@ cp ./configs/iterm2.json "$ITERM_PATH/profiles.json"
 defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0000-0000-0000-000000000001"
 
 # A11y queens
-brew install --cask keycastr colour-contrast-analyser pika
+brew install --cask keycastr colour-contrast-analyser pika 
+brew install --cask background-music # Background audio capture
 
 brew install --cask postman
 
