@@ -1624,17 +1624,20 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
 
 function prompt_dyno_host() {
-  HOST="local"
+  HOST="·"
   ICON="🏠"
 
-  if [[ -n "$CODESPACE_NAME" ]]; then
-    HOST="$CODESPACE_NAME"
-
-    if [[ ${#HOST} -gt 10 ]]; then
-      HOST="~${CODESPACE_NAME: -9}"
-    fi
-
+  if [[ -n "$CODESPACES" ]]; then
+    HOST="$CODESPACE_DISPLAYNAME"
     ICON="🪐"
+
+    if [[ -z "$HOST" ]]; then
+      HOST="$CODESPACE_NAME"
+
+      if [[ ${#HOST} -gt 10 ]]; then
+        HOST="~${CODESPACE_NAME: -9}"
+      fi
+    fi
   fi
 
   p10k segment -f '#efc1cc' -i $ICON -t $HOST

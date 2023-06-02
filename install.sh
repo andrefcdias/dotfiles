@@ -21,7 +21,7 @@ sudo chsh "$(id -un)" --shell "/usr/bin/zsh"
 if $CODESPACES -eq true && test -z "$CODESPACE_DISPLAYNAME" ; then
     codespaces=$(gh codespace list)
     codespace_name=$(echo "$codespaces" | awk '{print $1, $2}' | grep $CODESPACE_NAME | awk '{print $2}')
-    echo 'export CODESPACE_DISPLAYNAME=$codespace_name' >>~/.zshrc
+    echo "export CODESPACE_DISPLAYNAME=${codespace_name}" >>~/.zshrc
 fi
 
 source ~/.zshrc
