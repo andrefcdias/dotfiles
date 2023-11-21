@@ -1,4 +1,4 @@
 #!/bin/sh
 
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-apt-get install build-essential
+sudo apt-get install build-essential
