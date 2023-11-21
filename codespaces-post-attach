@@ -1,4 +1,4 @@
-# #!/bin/sh
+#!/bin/sh
 
 # NPM_PATH=$(npm config get prefix)
 # if ! echo $PATH | grep -q $NPM_PATH; then
@@ -12,3 +12,6 @@
 # eval "$(github-copilot-cli alias -- "$0")"
 
 # zsh
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+apt-get install build-essential
