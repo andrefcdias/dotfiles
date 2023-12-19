@@ -76,3 +76,6 @@ killall Dock
 # Other apps
 brew install --cask microsoft-edge microsoft-teams
 brew install --cask spotify discord
+
+# Slack thread extension
+gh extension install https://github.com/rneatherway/gh-slack
