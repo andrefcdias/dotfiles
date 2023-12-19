@@ -49,6 +49,7 @@ defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "00000000-0
 # A11y queens
 brew install --cask keycastr colour-contrast-analyser pika 
 brew install --cask background-music # Background audio capture
+# Alternative screen recorder - https://rewatch.com/screen-recorder/
 
 brew install --cask postman
 
